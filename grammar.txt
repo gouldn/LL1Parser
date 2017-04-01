@@ -1,0 +1,32 @@
+tok_eof 1
+ident 2
+rw_read 13
+rw_write 18
+lit_int 19
+becomes 21
+op_add 22
+op_sub 23
+op_mul 24
+op_div 25
+lparen 26
+rparen 27
+
+program -> stmt_list tok_eof
+stmt_list -> stmt stmt_list
+stmt_list ->
+stmt -> ident becomes expr
+stmt -> rw_read ident
+stmt -> rw_write expr
+expr -> term term_tail
+term_tail -> add_op term term_tail
+term_tail ->
+term -> factor fact_tail
+fact_tail -> mult_op factor fact_tail
+fact_tail ->
+factor -> lparen expr rparen
+factor -> ident
+factor -> lit_int
+add_op -> op_add
+add_op -> op_sub
+mult_op -> op_mul
+mult_op -> op_div
